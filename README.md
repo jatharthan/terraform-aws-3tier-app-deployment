@@ -20,6 +20,6 @@ The **Node.js application code** used in this project is sourced from the follow
 
 For a detailed explanation of the infrastructure being deployed, refer to this [blog post](https://shreyashbhise.hashnode.dev/deploy-a-three-tier-architecture-on-aws-end-to-end-project-demo).
 
-Proper modular structure of the terraform code will be deployed soon 
+## Proper modular structure of the terraform code will be deployed soon 
 
 ---
