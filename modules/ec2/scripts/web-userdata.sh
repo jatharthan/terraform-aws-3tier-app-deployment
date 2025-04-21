@@ -33,7 +33,7 @@ sleep 10
 
 # Fetch app files from S3
 cd ~/
-aws s3 cp s3://ncpl-terraform-project9-jatha/web-tier/ web-tier --recursive
+aws s3 cp s3://project9-code-bucket/web-tier/ web-tier --recursive
 
 sleep 10
 
@@ -56,7 +56,7 @@ sleep 10
 #updating the file with details of internal loadbalancer
 cd /etc/nginx
 sudo rm nginx.conf
-sudo aws s3 cp s3://ncpl-terraform-project9-jatha/nginx.conf .
+sudo aws s3 cp s3://project9-code-bucket/nginx.conf .
 
 sleep 10
 

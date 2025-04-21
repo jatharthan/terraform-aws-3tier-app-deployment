@@ -19,8 +19,8 @@ resource "aws_rds_cluster" "aurora_cluster" {
   master_password         = "jatharthan"
   backup_retention_period = 1
   preferred_backup_window = "07:00-09:00"
-  db_subnet_group_name    = aws_db_subnet_group.db_subnet_group.name
-  vpc_security_group_ids  = [aws_security_group.private_db_sg.id]
+  db_subnet_group_name    = var.db_subnet_group_name
+  vpc_security_group_ids  = [var.aws_security_group]
   storage_encrypted       = true
   availability_zones      = ["us-east-1a", "us-east-1b"]
   skip_final_snapshot     = true
@@ -43,7 +43,7 @@ resource "aws_rds_cluster_instance" "aurora_writer" {
   instance_class          = "db.t3.medium"
   engine                  = "aurora-mysql"
   publicly_accessible     = false
-  db_subnet_group_name    = aws_db_subnet_group.db_subnet_group.name
+  db_subnet_group_name    = var.db_subnet_group_name
   availability_zone       = "us-east-1a"
 
   tags = {
@@ -53,12 +53,13 @@ resource "aws_rds_cluster_instance" "aurora_writer" {
 
 # Reader instance
 resource "aws_rds_cluster_instance" "aurora_reader" {
+  depends_on = [aws_rds_cluster_instance.aurora_writer] # Ensures writer is created first
   identifier              = "${var.project_prefix}-aurora-reader"
   cluster_identifier      = aws_rds_cluster.aurora_cluster.id
   instance_class          = "db.t3.medium"
   engine                  = "aurora-mysql"
   publicly_accessible     = false
-  db_subnet_group_name    = aws_db_subnet_group.db_subnet_group.name
+  db_subnet_group_name    = var.db_subnet_group_name
   availability_zone       = "us-east-1b"
 
   tags = {

@@ -366,8 +366,3 @@ resource "aws_db_subnet_group" "db_subnet_group" {
     Name = "${var.project_prefix}-db-subnet-group"
   }
 }
-
-
-
-
-

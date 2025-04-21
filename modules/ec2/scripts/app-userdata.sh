@@ -38,7 +38,7 @@ sleep 10
 
 # Fetch app files from S3
 cd ~/
-aws s3 cp s3://ncpl-terraform-project9-jatha/app-tier/ app-tier --recursive
+aws s3 cp s3://project9-code-bucket/app-tier/ app-tier --recursive
 
 sleep 10
 
